@@ -5,8 +5,6 @@ import fonction
 import numpy as np
 import time
 
-#commentaire test
-
 pg.init()
 
 displaySize = width, height = 720, 576
