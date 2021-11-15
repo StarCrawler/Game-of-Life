@@ -7,7 +7,7 @@ import numpy as np
 
 pg.init()
 
-displaySize = width, height = 720, 576
+displaySize = width, height = 720, 580
 maxPrintGrid = [width, height - 100]
 xPosGridLine = 0
 yPosGridLine = 0
