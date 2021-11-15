@@ -1,9 +1,9 @@
 import sys
 import pygame as pg
 import Game_of_Life_Fonction as fct
-import Game_of_Life_Class
+import Game_of_Life_Class as Cs
 import numpy as np
-import time
+#import time
 
 pg.init()
 
