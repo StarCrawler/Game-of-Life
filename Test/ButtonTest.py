@@ -26,7 +26,7 @@ class Button(object):
         text = self.buttonFont.render(self.hisName, True, pg.Color(0, 0, 0))
         self.hisWidth = text.get_rect()[2] + 20
         self.hisHeight = text.get_rect()[3] + 20
-        print(text.get_rect())
+        print(text.get_rect() + "add")
         pg.draw.rect(self.hisDisplay, self.hisColor, pg.Rect(self.hisX, self.hisY, self.hisWidth, self.hisHeight))
         self.hisDisplay.blit(text,(self.hisX + self.hisWidth/2 - text.get_rect()[2]/2,self.hisY + self.hisHeight/2 - text.get_rect()[3]/2))
 

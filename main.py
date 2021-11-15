@@ -14,9 +14,14 @@ yPosGridLine = 0
 cellSize = 10
 gridSize = [int(maxPrintGrid[1]/cellSize), int(width/cellSize)]
 grid = np.zeros(gridSize)
+simulating = False
+modificationType = ""
+icon = pg.image.load("logo.png")
 
 
 screen = pg.display.set_mode(displaySize)
+pg.display.set_icon(icon)
+pg.display.set_caption("Game of Life")
 
 grid[5][1] = 1
 grid[6][1] = 1
@@ -57,11 +62,46 @@ grid[4][36] = 1
 
 #print(grid)
 
+AddButton = cs.Button("Add", pg.Color(100,100,100), 50, height-75, screen)
+RemoveButton = cs.Button("Remove", pg.Color(100,100,100), 320, height-75, screen)
+SimulateBouton = cs.Button("Simulate", pg.Color(100,100,100), 600, height-75, screen)
+StopSimulateBouton = cs.Button("Stop Simulation", pg.Color(100,100,100), 550, height-75, screen)
+
 while True:
+    screen.fill(pg.Color(225,225,225))
+
+    AddButton.printButton()
+    AddButton.isHoover()
+
+    RemoveButton.printButton()
+    RemoveButton.isHoover()
+
+    if simulating == False:
+        SimulateBouton.printButton()
+        SimulateBouton.isHoover()
+    if simulating == True:
+        StopSimulateBouton.printButton()
+        StopSimulateBouton.isHoover()
+        fct.cell(grid)
+
     fct.printCell(grid, gridSize, screen, cellSize)
     fct.grid(maxPrintGrid,xPosGridLine, yPosGridLine ,cellSize,screen)
-    fct.cell(grid)
+
     pg.display.flip()
+
     for event in pg.event.get():
+        if simulating == False and SimulateBouton.isClicked() == True:
+            simulating = True
+        elif simulating == True and StopSimulateBouton.isClicked() == True:
+            simulating = False
+
+        if AddButton.isClicked():
+            modificationType = "Add"
+        elif RemoveButton.isClicked():
+            modificationType = "Remove"
+
+        if simulating == False:
+            fct.addCell(grid, maxPrintGrid, cellSize, pg.mouse.get_pos(), modificationType)
+
         if event.type == pg.QUIT:
              sys.exit(0)
