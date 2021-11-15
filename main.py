@@ -1,7 +1,7 @@
 import sys
 import pygame as pg
 import Game_of_Life_Fonction as fct
-import Game_of_Life_Class as Cs
+import Game_of_Life_Class as cs
 import numpy as np
 #import time
 
