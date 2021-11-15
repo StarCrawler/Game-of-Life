@@ -10,11 +10,12 @@ class Button(object):
     """docstring for Button."""
 
 
-    def __init__(self, Name, Width, Height, Color, XPos, YPos, Display):
+    def __init__(self, Name, Color, XPos, YPos, Display):
         self.hisName = Name
-        self.hisWidth = Width
-        self.hisHeight = Height
-        self.hisColor = Color
+        self.startColor = Color
+        self.hisColor = 0
+        self.hisWidth = 0
+        self.hisHeight = 0
         self.hisX = XPos
         self.hisY = YPos
         self.hisDisplay = Display
@@ -23,8 +24,11 @@ class Button(object):
 
     def printButton(self):
         text = self.buttonFont.render(self.hisName, True, pg.Color(0, 0, 0))
+        self.hisWidth = text.get_rect()[2] + 20
+        self.hisHeight = text.get_rect()[3] + 20
+        print(text.get_rect())
         pg.draw.rect(self.hisDisplay, self.hisColor, pg.Rect(self.hisX, self.hisY, self.hisWidth, self.hisHeight))
-        self.hisDisplay.blit(text,(200,100+(50-10)))
+        self.hisDisplay.blit(text,(self.hisX + self.hisWidth/2 - text.get_rect()[2]/2,self.hisY + self.hisHeight/2 - text.get_rect()[3]/2))
 
     def isCollided(self,Pos):
         if Pos[0] >= self.hisX and Pos[0] <= self.hisX + self.hisWidth and Pos[1] >= self.hisY and Pos[1] <= self.hisY + self.hisHeight:
@@ -34,10 +38,17 @@ class Button(object):
         if pg.mouse.get_pressed()[0] and self.isCollided(pg.mouse.get_pos()):
             screen.fill(pg.Color(0,0,0))
 
-testButton = Button("Test", 200, 100, pg.Color(100, 100, 100), 100, 100, screen )
+    def isHoover(self):
+        if self.isCollided(pg.mouse.get_pos()):
+            self.hisColor = pg.Color(200,200,200)
+        else:
+            self.hisColor = self.startColor
+
+testButton = Button("Test", pg.Color(100, 100, 100), 100, 100, screen )
 while 1:
     screen.fill(pg.Color(255,255,255))
     testButton.printButton()
+    testButton.isHoover()
     testButton.isClicked()
     pg.display.flip()
     for event in pg.event.get():
