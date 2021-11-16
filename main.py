@@ -64,8 +64,9 @@ grid[4][36] = 1
 
 AddButton = cs.Button("Add", pg.Color(100,100,100), 50, height-75, screen)
 RemoveButton = cs.Button("Remove", pg.Color(100,100,100), 320, height-75, screen)
-SimulateBouton = cs.Button("Simulate", pg.Color(100,100,100), 600, height-75, screen)
-StopSimulateBouton = cs.Button("Stop Simulation", pg.Color(100,100,100), 550, height-75, screen)
+SimulateButton = cs.Button("Simulate", pg.Color(100,100,100), 600, height-75, screen)
+StopSimulateButton = cs.Button("Stop Simulation", pg.Color(100,100,100), 550, height-75, screen)
+ClearButton = cs.Button("Clear Grid", pg.Color(100,100,100), 150, height-75, screen)
 
 while True:
     screen.fill(pg.Color(225,225,225))
@@ -77,11 +78,14 @@ while True:
     RemoveButton.isHoover()
 
     if simulating == False:
-        SimulateBouton.printButton()
-        SimulateBouton.isHoover()
+        SimulateButton.printButton()
+        SimulateButton.isHoover()
+
+        ClearButton.printButton()
+        ClearButton.isHoover()
     if simulating == True:
-        StopSimulateBouton.printButton()
-        StopSimulateBouton.isHoover()
+        StopSimulateButton.printButton()
+        StopSimulateButton.isHoover()
         fct.cell(grid)
 
     fct.printCell(grid, gridSize, screen, cellSize)
@@ -90,10 +94,13 @@ while True:
     pg.display.flip()
 
     for event in pg.event.get():
-        if simulating == False and SimulateBouton.isClicked() == True:
+        if simulating == False and SimulateButton.isClicked() == True:
             simulating = True
-        elif simulating == True and StopSimulateBouton.isClicked() == True:
+        if simulating == True and StopSimulateButton.isClicked() == True:
             simulating = False
+
+        if simulating == False and ClearButton.isClicked() == True:
+            grid = np.zeros(gridSize)
 
         if AddButton.isClicked():
             modificationType = "Add"
