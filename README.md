@@ -14,13 +14,13 @@ John Conway's Game of Life work with three rules :
 
   3. To live, a cell must have 2 or 3 living neighbours.
 
- ## Functionalities
+## Functionalities
 
- ### Simulating Cells
+### Simulating Cells
 
  First of all, the principal functionality of this project is to simulate the 3 rules of Game of Life through a function.
 
- ### Add and remove cells in the window
+### Add and remove cells in the window
 
 The game starts with an empty grid in order to allow you to launch a simulation with any initial situation you wish.
 
